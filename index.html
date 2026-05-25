@@ -1,0 +1,1321 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>WATCHARIN PORTFOLIO</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;500;600;700&family=Orbitron:wght@700;900&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #0a0e1a;
+    --navy2: #0f1629;
+    --navy3: #141d35;
+    --navy4: #1a2540;
+    --navy5: #1e2d4d;
+    --yellow: #f5c518;
+    --yellow2: #ffd700;
+    --blue: #1e6fff;
+    --blue2: #3d8bff;
+    --cyan: #00d4ff;
+    --white: #ffffff;
+    --gray: #8a9bb5;
+    --light: #c8d6e8;
+    /* ===== DARK THEME CARDS ===== */
+    --bg-light: transparent;
+    --card-bg: rgba(13, 22, 45, 0.82);
+    --card-bg-solid: #0d162d;
+    --text-dark: #d8e8ff;
+    --text-gray: #8a9bb5;
+    --border-light: rgba(60, 120, 255, 0.18);
+    --sidebar-w: 240px;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'Sarabun', sans-serif;
+    background: var(--bg-light);
+    color: var(--text-dark);
+    display: flex;
+    min-height: 100vh;
+  }
+
+  /* ========== SIDEBAR ========== */
+  .sidebar {
+    width: var(--sidebar-w);
+    min-height: 100vh;
+    background-image: url('./images/sidebar-bg.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-color: #08111f;
+    border-right: 1px solid rgba(245,197,24,0.15);
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 100;
+    box-shadow:
+      8px 0 20px rgba(0,0,0,0.45),
+      15px 0 40px rgba(30,111,255,0.15),
+      3px 0 0 rgba(255,255,255,0.03);
+  }
+  .sidebar-logo {
+    padding: 24px 20px 20px;
+    border-bottom: 1px solid rgba(245,197,24,0.1);
+  }
+  .logo-icon { font-size: 28px; color: var(--yellow); margin-bottom: 6px; }
+  .logo-title {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 13px; font-weight: 900;
+    color: var(--white); letter-spacing: 1px; line-height: 1.3;
+  }
+  .logo-sub { font-size: 10px; color: var(--gray); letter-spacing: 3px; margin-top: 2px; }
+
+  /* ========== NAV MENU ========== */
+  .nav-menu {
+    flex: 1; padding: 12px 10px 12px 14px;
+    list-style: none; display: flex; flex-direction: column; gap: 8px;
+  }
+  .nav-item {
+    position: relative;
+    filter:
+      drop-shadow(3px 4px 0px rgba(0,0,0,0.7))
+      drop-shadow(0px 2px 6px rgba(0,0,0,0.5));
+    transition: filter 0.12s ease, transform 0.12s ease;
+  }
+  .nav-item:hover {
+    filter:
+      drop-shadow(3px 4px 0px rgba(0,0,0,0.8))
+      drop-shadow(0px 0px 10px rgba(30,120,255,0.35));
+  }
+  .nav-item:active {
+    filter: drop-shadow(1px 1px 0px rgba(0,0,0,0.6));
+    transform: translate(2px, 2px);
+  }
+  .nav-link {
+    position: relative; height: 52px;
+    display: flex; align-items: center; gap: 0; padding: 0;
+    font-weight: 700; font-size: 13px; letter-spacing: 1.8px;
+    text-transform: uppercase; color: #7a9cc8;
+    cursor: pointer; text-decoration: none; overflow: hidden;
+    transition: all 0.12s ease;
+    clip-path: polygon(14px 0%,calc(100% - 14px) 0%,100% 14px,100% calc(100% - 14px),calc(100% - 14px) 100%,14px 100%,0% calc(100% - 14px),0% 14px);
+    background: linear-gradient(180deg,#1a2d52 0%,#0f1e3a 40%,#091428 100%);
+  }
+  .nav-link::before {
+    content: ""; position: absolute; inset: 0;
+    clip-path: polygon(14px 0%,calc(100% - 14px) 0%,100% 14px,100% calc(100% - 14px),calc(100% - 14px) 100%,14px 100%,0% calc(100% - 14px),0% 14px);
+    background: linear-gradient(180deg,#2a4a80 0%,#1a3060 50%,#0f2040 100%);
+    z-index: 0;
+  }
+  .nav-link::after {
+    content: ""; position: absolute; inset: 1.5px;
+    clip-path: polygon(12px 0%,calc(100% - 12px) 0%,100% 12px,100% calc(100% - 12px),calc(100% - 12px) 100%,12px 100%,0% calc(100% - 12px),0% 12px);
+    background: linear-gradient(180deg,#1a2d52 0%,#0f1e3a 40%,#091428 100%);
+    z-index: 0;
+  }
+  .nav-icon-box,.nav-label,.nav-corner-tl,.nav-corner-br { position: relative; z-index: 1; }
+  .nav-icon-box {
+    width: 48px; height: 52px;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0; font-size: 18px;
+    background: linear-gradient(180deg,#0d1a30 0%,#070e1e 100%);
+    border-right: 1px solid rgba(40,90,180,0.5); margin-right: 14px;
+  }
+  .nav-label { flex: 1; font-size: 12.5px; font-weight: 700; letter-spacing: 1.5px; color: #7a9cc8; transition: color 0.12s; }
+  .nav-corner-tl { position: absolute !important; top: 4px; left: 52px; width: 20px; height: 1px; background: rgba(60,120,220,0.4); }
+  .nav-corner-br { position: absolute !important; bottom: 4px; right: 16px; width: 20px; height: 1px; background: rgba(60,120,220,0.4); }
+  .nav-link:hover .nav-label { color: #c8dff8; }
+  .nav-link:hover::after { background: linear-gradient(180deg,#1e3460 0%,#122244 40%,#0c1a36 100%); }
+  .nav-link:hover .nav-corner-tl,.nav-link:hover .nav-corner-br { background: rgba(80,160,255,0.7); }
+  .nav-item.active-item {
+    filter:
+      drop-shadow(3px 4px 0px rgba(0,0,0,0.7))
+      drop-shadow(0px 0px 14px rgba(255,200,0,0.6))
+      drop-shadow(0px 0px 6px rgba(255,180,0,0.4));
+  }
+  .nav-link.active { background: linear-gradient(180deg,#ffe040 0%,#ffb800 50%,#e8960a 100%); color: #1a0e00; }
+  .nav-link.active::before { background: linear-gradient(180deg,#fff176 0%,#ffcc00 50%,#c87800 100%); }
+  .nav-link.active::after { background: linear-gradient(180deg,#ffe040 0%,#ffb800 50%,#e8960a 100%); }
+  .nav-link.active .nav-icon-box { background: linear-gradient(180deg,#3a2500 0%,#1e1200 100%); border-right-color: rgba(200,120,0,0.6); }
+  .nav-link.active .nav-label { color: #1a0e00; font-weight: 800; }
+  .nav-link.active .nav-corner-tl,.nav-link.active .nav-corner-br { background: rgba(150,80,0,0.5); }
+  .nav-icon { font-size: 17px; line-height: 1; max-width: 32px; max-height: 32px; object-fit: contain; }
+
+  .sidebar-social { padding: 16px 20px 24px; border-top: 1px solid rgba(245,197,24,0.1); }
+  .social-label { font-size: 10px; color: var(--gray); letter-spacing: 2px; margin-bottom: 12px; }
+  .social-icons { display: flex; gap: 10px; }
+  .social-btn {
+    width: 34px; height: 34px; border-radius: 8px;
+    border: 1px solid rgba(255,255,255,0.1);
+    display: flex; align-items: center; justify-content: center;
+    color: var(--gray); font-size: 16px; cursor: pointer;
+    transition: all 0.2s; text-decoration: none;
+  }
+  .social-btn:hover { border-color: var(--yellow); color: var(--yellow); }
+
+  /* ========== MAIN CONTENT ========== */
+  .main {
+    margin-left: var(--sidebar-w); flex: 1; min-height: 100vh;
+    background-image: url('./images/sidebar-bg1.png');
+    background-size: cover; background-position: center;
+    background-repeat: no-repeat; background-attachment: fixed;
+  }
+  .section { display: none; min-height: 100vh; padding: 40px 48px; }
+  .section.active { display: block; }
+  #home { display: none; position: relative; }
+  #home.active { display: flex; flex-direction: column; gap: 32px; }
+
+  /* HERO */
+  .hero {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 40px; align-items: center; min-height: 380px; position: relative;
+  }
+  .hero-tag { font-size: 14px; font-weight: 700; color: var(--blue2); letter-spacing: 2px; margin-bottom: 8px; }
+  .hero-name {
+    font-family: 'Orbitron', sans-serif; font-size: 46px; font-weight: 900;
+    line-height: 1.1; color: #e8f0ff; text-transform: uppercase;
+  }
+  .hero-name span.blue { color: var(--blue2); }
+  .hero-name span.bolt { color: var(--yellow); }
+  .hero-role {
+    display: inline-flex; margin: 20px 0;
+    background: var(--yellow); padding: 6px 20px;
+    border-radius: 4px; transform: skewX(-10deg);
+  }
+  .hero-role span { transform: skewX(10deg); font-weight: 700; font-size: 14px; letter-spacing: 2px; color: var(--navy); }
+  .hero-desc { font-size: 16px; color: #8aaccc; line-height: 1.8; max-width: 480px; margin-bottom: 28px; font-weight: 500; }
+  .hero-btns { display: flex; gap: 14px; }
+
+  /* ===== OCTAGON BUTTONS (matching sidebar style) ===== */
+  /* Wrapper provides the 3D drop shadow */
+  .btn-oct-wrap {
+    display: inline-block;
+    filter:
+      drop-shadow(3px 4px 0px rgba(0,0,0,0.75))
+      drop-shadow(0px 2px 8px rgba(0,0,0,0.5));
+    transition: filter 0.12s ease, transform 0.12s ease;
+    cursor: pointer;
+  }
+  .btn-oct-wrap:hover {
+    filter:
+      drop-shadow(3px 4px 0px rgba(0,0,0,0.85))
+      drop-shadow(0px 0px 14px rgba(245,197,24,0.55));
+    transform: translateY(-2px);
+  }
+  .btn-oct-wrap:active {
+    filter: drop-shadow(1px 1px 0px rgba(0,0,0,0.6));
+    transform: translate(2px, 2px);
+  }
+  .btn-oct-wrap.blue-wrap:hover {
+    filter:
+      drop-shadow(3px 4px 0px rgba(0,0,0,0.85))
+      drop-shadow(0px 0px 14px rgba(30,111,255,0.6));
+  }
+
+  /* The actual button — octagon clip-path */
+  .btn-primary, .btn-secondary {
+    position: relative; height: 52px;
+    display: flex; align-items: center; gap: 0; padding: 0;
+    font-family: 'Sarabun', sans-serif; font-weight: 800;
+    font-size: 13px; letter-spacing: 1.8px; text-transform: uppercase;
+    cursor: pointer; border: none; overflow: hidden;
+    clip-path: polygon(14px 0%,calc(100% - 14px) 0%,100% 14px,100% calc(100% - 14px),calc(100% - 14px) 100%,14px 100%,0% calc(100% - 14px),0% 14px);
+  }
+  /* YELLOW (primary) */
+  .btn-primary {
+    color: #1a0e00;
+    background: linear-gradient(180deg,#ffe040 0%,#ffb800 50%,#e8960a 100%);
+  }
+  .btn-primary::before {
+    content: ""; position: absolute; inset: 0;
+    clip-path: polygon(14px 0%,calc(100% - 14px) 0%,100% 14px,100% calc(100% - 14px),calc(100% - 14px) 100%,14px 100%,0% calc(100% - 14px),0% 14px);
+    background: linear-gradient(180deg,#fff176 0%,#ffcc00 50%,#c87800 100%);
+    z-index: 0;
+  }
+  .btn-primary::after {
+    content: ""; position: absolute; inset: 1.5px;
+    clip-path: polygon(12px 0%,calc(100% - 12px) 0%,100% 12px,100% calc(100% - 12px),calc(100% - 12px) 100%,12px 100%,0% calc(100% - 12px),0% 12px);
+    background: linear-gradient(180deg,#ffe040 0%,#ffb800 50%,#e8960a 100%);
+    z-index: 0;
+  }
+  /* BLUE (secondary) */
+  .btn-secondary {
+    color: #ffffff;
+    background: linear-gradient(180deg,#3d7fff 0%,#1e6fff 50%,#1050cc 100%);
+  }
+  .btn-secondary::before {
+    content: ""; position: absolute; inset: 0;
+    clip-path: polygon(14px 0%,calc(100% - 14px) 0%,100% 14px,100% calc(100% - 14px),calc(100% - 14px) 100%,14px 100%,0% calc(100% - 14px),0% 14px);
+    background: linear-gradient(180deg,#5a9fff 0%,#2a7fff 50%,#1860e0 100%);
+    z-index: 0;
+  }
+  .btn-secondary::after {
+    content: ""; position: absolute; inset: 1.5px;
+    clip-path: polygon(12px 0%,calc(100% - 12px) 0%,100% 12px,100% calc(100% - 12px),calc(100% - 12px) 100%,12px 100%,0% calc(100% - 12px),0% 12px);
+    background: linear-gradient(180deg,#3d7fff 0%,#1e6fff 50%,#1050cc 100%);
+    z-index: 0;
+  }
+  /* Icon box inside buttons */
+  .btn-icon-box {
+    width: 48px; height: 52px;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0; font-size: 18px;
+    position: relative; z-index: 1; margin-right: 8px;
+  }
+  .btn-primary .btn-icon-box { background: rgba(50,20,0,0.35); border-right: 1px solid rgba(180,100,0,0.5); }
+  .btn-secondary .btn-icon-box { background: rgba(0,20,60,0.4); border-right: 1px solid rgba(40,100,220,0.5); }
+  .btn-label { position: relative; z-index: 1; padding-right: 20px; }
+  /* Corner decorations */
+  .btn-corner-tl {
+    position: absolute; top: 5px; left: 52px;
+    width: 18px; height: 1px; z-index: 1;
+  }
+  .btn-corner-br {
+    position: absolute; bottom: 5px; right: 16px;
+    width: 18px; height: 1px; z-index: 1;
+  }
+  .btn-primary .btn-corner-tl,.btn-primary .btn-corner-br { background: rgba(120,60,0,0.5); }
+  .btn-secondary .btn-corner-tl,.btn-secondary .btn-corner-br { background: rgba(40,100,220,0.5); }
+
+  /* ===== SMALL OCTAGON BUTTONS (for view-all, filter, etc.) ===== */
+  .btn-oct-sm-wrap {
+    display: inline-block;
+    filter: drop-shadow(2px 3px 0px rgba(0,0,0,0.7)) drop-shadow(0px 1px 5px rgba(0,0,0,0.4));
+    transition: filter 0.12s ease, transform 0.12s ease; cursor: pointer;
+  }
+  .btn-oct-sm-wrap:hover {
+    filter: drop-shadow(2px 3px 0px rgba(0,0,0,0.8)) drop-shadow(0px 0px 10px rgba(30,111,255,0.4));
+    transform: translateY(-1px);
+  }
+  .btn-oct-sm-wrap:active { filter: drop-shadow(1px 1px 0px rgba(0,0,0,0.5)); transform: translate(1px,1px); }
+  .btn-oct-sm-wrap.yellow-sm:hover {
+    filter: drop-shadow(2px 3px 0px rgba(0,0,0,0.8)) drop-shadow(0px 0px 10px rgba(245,197,24,0.5));
+  }
+
+  /* Small octagon base style */
+  .view-all, .filter-btn, .download-btn, .btn-more-about {
+    position: relative; overflow: hidden;
+    font-family: 'Sarabun', sans-serif; cursor: pointer; border: none;
+  }
+
+  .view-all {
+    height: 38px; display: flex; align-items: center; padding: 0 16px;
+    font-size: 12px; font-weight: 700; letter-spacing: 1.2px; text-transform: uppercase;
+    color: #c8dff8;
+    clip-path: polygon(10px 0%,calc(100% - 10px) 0%,100% 10px,100% calc(100% - 10px),calc(100% - 10px) 100%,10px 100%,0% calc(100% - 10px),0% 10px);
+    background: linear-gradient(180deg,#1a2d52 0%,#0f1e3a 40%,#091428 100%);
+  }
+  .view-all::before {
+    content: ""; position: absolute; inset: 0;
+    clip-path: polygon(10px 0%,calc(100% - 10px) 0%,100% 10px,100% calc(100% - 10px),calc(100% - 10px) 100%,10px 100%,0% calc(100% - 10px),0% 10px);
+    background: linear-gradient(180deg,#2a4a80 0%,#1a3060 50%,#0f2040 100%);
+    z-index: 0;
+  }
+  .view-all::after {
+    content: ""; position: absolute; inset: 1.5px;
+    clip-path: polygon(8px 0%,calc(100% - 8px) 0%,100% 8px,100% calc(100% - 8px),calc(100% - 8px) 100%,8px 100%,0% calc(100% - 8px),0% 8px);
+    background: linear-gradient(180deg,#1a2d52 0%,#0f1e3a 40%,#091428 100%);
+    z-index: 0;
+  }
+  .view-all span { position: relative; z-index: 1; }
+
+  /* Filter buttons */
+  .filter-btn {
+    height: 38px; display: flex; align-items: center; padding: 0 16px;
+    font-size: 12px; font-weight: 600; letter-spacing: 1px;
+    color: #8aaccc;
+    clip-path: polygon(10px 0%,calc(100% - 10px) 0%,100% 10px,100% calc(100% - 10px),calc(100% - 10px) 100%,10px 100%,0% calc(100% - 10px),0% 10px);
+    background: linear-gradient(180deg,#1a2d52 0%,#0f1e3a 40%,#091428 100%);
+    transition: color 0.12s;
+  }
+  .filter-btn::before {
+    content: ""; position: absolute; inset: 0;
+    clip-path: polygon(10px 0%,calc(100% - 10px) 0%,100% 10px,100% calc(100% - 10px),calc(100% - 10px) 100%,10px 100%,0% calc(100% - 10px),0% 10px);
+    background: linear-gradient(180deg,#2a4a80 0%,#1a3060 50%,#0f2040 100%);
+    z-index: 0;
+  }
+  .filter-btn::after {
+    content: ""; position: absolute; inset: 1.5px;
+    clip-path: polygon(8px 0%,calc(100% - 8px) 0%,100% 8px,100% calc(100% - 8px),calc(100% - 8px) 100%,8px 100%,0% calc(100% - 8px),0% 8px);
+    background: linear-gradient(180deg,#1a2d52 0%,#0f1e3a 40%,#091428 100%);
+    z-index: 0; transition: background 0.12s;
+  }
+  .filter-btn span { position: relative; z-index: 1; }
+  .filter-btn:hover { color: #c8dff8; }
+  .filter-btn.active {
+    color: #1a0e00;
+    background: linear-gradient(180deg,#ffe040 0%,#ffb800 50%,#e8960a 100%);
+  }
+  .filter-btn.active::before { background: linear-gradient(180deg,#fff176 0%,#ffcc00 50%,#c87800 100%); }
+  .filter-btn.active::after { background: linear-gradient(180deg,#ffe040 0%,#ffb800 50%,#e8960a 100%); }
+
+  /* Download button */
+  .download-btn {
+    height: 52px; display: inline-flex; align-items: center; padding: 0;
+    font-size: 13px; font-weight: 800; letter-spacing: 1.8px; text-transform: uppercase;
+    color: #1a0e00;
+    clip-path: polygon(14px 0%,calc(100% - 14px) 0%,100% 14px,100% calc(100% - 14px),calc(100% - 14px) 100%,14px 100%,0% calc(100% - 14px),0% 14px);
+    background: linear-gradient(180deg,#ffe040 0%,#ffb800 50%,#e8960a 100%);
+    margin-bottom: 24px;
+  }
+  .download-btn::before {
+    content: ""; position: absolute; inset: 0;
+    clip-path: polygon(14px 0%,calc(100% - 14px) 0%,100% 14px,100% calc(100% - 14px),calc(100% - 14px) 100%,14px 100%,0% calc(100% - 14px),0% 14px);
+    background: linear-gradient(180deg,#fff176 0%,#ffcc00 50%,#c87800 100%);
+    z-index: 0;
+  }
+  .download-btn::after {
+    content: ""; position: absolute; inset: 1.5px;
+    clip-path: polygon(12px 0%,calc(100% - 12px) 0%,100% 12px,100% calc(100% - 12px),calc(100% - 12px) 100%,12px 100%,0% calc(100% - 12px),0% 12px);
+    background: linear-gradient(180deg,#ffe040 0%,#ffb800 50%,#e8960a 100%);
+    z-index: 0;
+  }
+  .download-btn .btn-icon-box { background: rgba(50,20,0,0.35); border-right: 1px solid rgba(180,100,0,0.5); }
+  .download-btn .btn-label { padding-right: 20px; position: relative; z-index: 1; }
+
+  /* btn-more-about */
+  .btn-more-about {
+    height: 48px; width: 100%; display: flex; align-items: center; justify-content: center;
+    padding: 0; font-size: 12px; font-weight: 800; letter-spacing: 1.5px; text-transform: uppercase;
+    color: #ffffff;
+    clip-path: polygon(12px 0%,calc(100% - 12px) 0%,100% 12px,100% calc(100% - 12px),calc(100% - 12px) 100%,12px 100%,0% calc(100% - 12px),0% 12px);
+    background: linear-gradient(180deg,#3d7fff 0%,#1e6fff 50%,#1050cc 100%);
+  }
+  .btn-more-about::before {
+    content: ""; position: absolute; inset: 0;
+    clip-path: polygon(12px 0%,calc(100% - 12px) 0%,100% 12px,100% calc(100% - 12px),calc(100% - 12px) 100%,12px 100%,0% calc(100% - 12px),0% 12px);
+    background: linear-gradient(180deg,#5a9fff 0%,#2a7fff 50%,#1860e0 100%);
+    z-index: 0;
+  }
+  .btn-more-about::after {
+    content: ""; position: absolute; inset: 1.5px;
+    clip-path: polygon(10px 0%,calc(100% - 10px) 0%,100% 10px,100% calc(100% - 10px),calc(100% - 10px) 100%,10px 100%,0% calc(100% - 10px),0% 10px);
+    background: linear-gradient(180deg,#3d7fff 0%,#1e6fff 50%,#1050cc 100%);
+    z-index: 0;
+  }
+  .btn-more-about span { position: relative; z-index: 1; }
+
+  /* "Send message" button inside contact form */
+  .btn-send {
+    height: 48px; display: inline-flex; align-items: center; padding: 0;
+    font-family: 'Sarabun', sans-serif; font-size: 13px; font-weight: 800;
+    letter-spacing: 1.5px; text-transform: uppercase; cursor: pointer; border: none;
+    color: #1a0e00; overflow: hidden; position: relative;
+    clip-path: polygon(12px 0%,calc(100% - 12px) 0%,100% 12px,100% calc(100% - 12px),calc(100% - 12px) 100%,12px 100%,0% calc(100% - 12px),0% 12px);
+    background: linear-gradient(180deg,#ffe040 0%,#ffb800 50%,#e8960a 100%);
+  }
+  .btn-send::before {
+    content: ""; position: absolute; inset: 0;
+    clip-path: polygon(12px 0%,calc(100% - 12px) 0%,100% 12px,100% calc(100% - 12px),calc(100% - 12px) 100%,12px 100%,0% calc(100% - 12px),0% 12px);
+    background: linear-gradient(180deg,#fff176 0%,#ffcc00 50%,#c87800 100%); z-index: 0;
+  }
+  .btn-send::after {
+    content: ""; position: absolute; inset: 1.5px;
+    clip-path: polygon(10px 0%,calc(100% - 10px) 0%,100% 10px,100% calc(100% - 10px),calc(100% - 10px) 100%,10px 100%,0% calc(100% - 10px),0% 10px);
+    background: linear-gradient(180deg,#ffe040 0%,#ffb800 50%,#e8960a 100%); z-index: 0;
+  }
+  .btn-send .btn-icon-box { background: rgba(50,20,0,0.35); border-right: 1px solid rgba(180,100,0,0.5); }
+  .btn-send .btn-label { padding-right: 20px; position: relative; z-index: 1; }
+
+  /* Filter bar wrapper */
+  .filter-bar { display: flex; gap: 8px; margin-bottom: 24px; flex-wrap: wrap; }
+  .filter-bar-wrap { display: inline-block; }
+  .filter-bar-wrap .filter-btn-wrap {
+    display: inline-block;
+    filter: drop-shadow(2px 3px 0px rgba(0,0,0,0.65)) drop-shadow(0px 1px 4px rgba(0,0,0,0.4));
+    transition: filter 0.12s, transform 0.12s; cursor: pointer;
+  }
+  .filter-bar-wrap .filter-btn-wrap:hover {
+    filter: drop-shadow(2px 3px 0px rgba(0,0,0,0.8)) drop-shadow(0px 0px 8px rgba(245,197,24,0.45));
+    transform: translateY(-1px);
+  }
+  .filter-bar-wrap .filter-btn-wrap:active { transform: translate(1px,1px); }
+
+  /* HERO VISUAL */
+  .hero-visual { position: relative; height: 100%; display: flex; justify-content: flex-end; }
+  .bg-image-3d {
+    width: 100%; height: 110%; position: absolute; top: -20px; right: -20px;
+    background-size: contain; background-position: right center; background-repeat: no-repeat; z-index: 1;
+  }
+  .quote-box {
+    position: absolute; bottom: 20px; right: 0;
+    background: var(--card-bg);
+    border: 1px solid var(--border-light);
+    backdrop-filter: blur(8px);
+    border-radius: 12px; padding: 16px 24px;
+    max-width: 260px; font-size: 12px; font-weight: 600;
+    color: var(--text-dark); line-height: 1.6; z-index: 2;
+  }
+  .quote-box .q-mark { color: var(--yellow); font-size: 24px; font-family: 'Georgia',serif; line-height: 0; position: relative; top: 8px; margin-right: 4px; }
+  .quote-box span.highlight { color: var(--blue2); }
+
+  /* STATS */
+  .stats-bar {
+    display: grid; grid-template-columns: repeat(5, 1fr); gap: 16px;
+    background: var(--card-bg);
+    border: 1px solid var(--border-light);
+    backdrop-filter: blur(10px);
+    border-radius: 14px; padding: 20px 28px; position: relative; z-index: 2;
+  }
+  .stat-item { display: flex; align-items: center; gap: 14px; padding: 4px 0; }
+  .stat-item:not(:last-child) { border-right: 1px solid var(--border-light); padding-right: 20px; }
+  .stat-icon-wrap { width: 42px; height: 42px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 20px; flex-shrink: 0; }
+  .stat-icon-wrap.yellow { background: rgba(245,197,24,0.12); color: #d4a000; }
+  .stat-icon-wrap.blue { background: rgba(30,111,255,0.12); color: var(--blue2); }
+  .stat-number { font-family: 'Orbitron',sans-serif; font-size: 20px; font-weight: 700; color: #e8f0ff; line-height: 1; }
+  .stat-label { font-size: 11px; font-weight: 600; color: var(--text-gray); letter-spacing: 1px; margin-top: 3px; }
+
+  /* HOME BOTTOM */
+  .home-bottom-layout { display: grid; grid-template-columns: 3.5fr 1.2fr; gap: 24px; }
+  .section-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 20px; }
+  .section-title { display: flex; align-items: center; gap: 10px; font-family: 'Orbitron',sans-serif; font-size: 16px; font-weight: 700; color: #d8e8ff; }
+  .section-title .bolt { color: var(--blue2); font-size: 18px; }
+
+  /* CARDS */
+  .project-card, .project-card-full, .exp-card, .skill-category,
+  .about-profile, .about-block, .cert-card, .contact-card, .resume-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border-light);
+    border-radius: 12px;
+    backdrop-filter: blur(8px);
+  }
+  .project-card { overflow: hidden; transition: all 0.25s; cursor: pointer; display: flex; flex-direction: column; }
+  .project-card:hover { border-color: rgba(30,111,255,0.4); box-shadow: 0 8px 30px rgba(0,0,0,0.35); transform: translateY(-3px); }
+  .project-img {
+    height: 110px; background-color: #0d1a30;
+    background-size: cover; background-position: center;
+    display: flex; align-items: center; justify-content: center; position: relative;
+  }
+  .project-cat { position: absolute; bottom: 8px; left: 8px; font-size: 10px; font-weight: 700; letter-spacing: 1px; padding: 3px 8px; border-radius: 4px; }
+  .cat-design { background: var(--yellow); color: var(--navy); }
+  .cat-iot { background: var(--blue); color: var(--white); }
+  .cat-ai { background: var(--yellow); color: var(--navy); }
+  .cat-elec { background: var(--blue); color: var(--white); }
+  .project-body { padding: 14px; flex: 1; display: flex; flex-direction: column; }
+  .project-name,.project-name-full { font-size: 14px; font-weight: 700; color: #d8e8ff; margin-bottom: 6px; }
+  .project-desc,.project-desc-full { font-size: 12px; color: var(--text-gray); line-height: 1.6; margin-bottom: 10px; flex: 1; }
+  .project-tags { display: flex; flex-wrap: wrap; gap: 4px; }
+  .tag { font-size: 10px; padding: 2px 8px; background: rgba(30,111,255,0.15); border-radius: 4px; color: var(--blue2); font-weight: 600; border: 1px solid rgba(30,111,255,0.2); }
+
+  /* ABOUT MINI */
+  .about-mini-wrap {
+    background: var(--card-bg); border-radius: 14px; overflow: hidden;
+    backdrop-filter: blur(10px); display: flex; flex-direction: column;
+    border: 1px solid var(--border-light);
+  }
+  .about-mini-top {
+    height: 120px;
+    background: radial-gradient(circle at top right, rgba(30,111,255,0.15) 0%, transparent 70%);
+    display: flex; align-items: center; justify-content: center; position: relative;
+  }
+  .mini-avatar {
+    width: 110px; height: 110px; border-radius: 50%;
+    background-color: #1a2540; border: 3px solid rgba(30,111,255,0.4);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+    background-size: cover; background-position: center; z-index: 2;
+  }
+  .about-mini-bottom {
+    background: var(--yellow); padding: 20px 16px;
+    text-align: center; flex: 1; display: flex; flex-direction: column; justify-content: space-between;
+  }
+  .mini-role { font-family: 'Orbitron',sans-serif; font-size: 16px; font-weight: 900; color: var(--navy); line-height: 1.2; margin-bottom: 8px; }
+  .mini-desc { font-size: 12px; color: var(--navy2); font-weight: 500; margin-bottom: 16px; line-height: 1.5; }
+
+  /* PAGE TITLES */
+  .page-title { font-family: 'Orbitron',sans-serif; font-size: 28px; font-weight: 900; margin-bottom: 6px; color: #e8f0ff; }
+  .page-title span { color: var(--blue2); }
+  .page-sub { color: var(--text-gray); font-size: 14px; margin-bottom: 32px; }
+
+  /* PROJECTS PAGE */
+  #projects.active { display: block; }
+  .projects-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
+  .projects-grid-full { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+  .project-card-full { overflow: hidden; transition: all 0.25s; cursor: pointer; }
+  .project-card-full:hover { border-color: rgba(30,111,255,0.4); transform: translateY(-4px); box-shadow: 0 10px 30px rgba(0,0,0,0.35); }
+  .project-img-full {
+    height: 160px; background: #0a1628;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 56px; position: relative; color: var(--text-gray);
+  }
+  .project-body-full { padding: 18px; }
+  .project-name-full { font-size: 16px; font-weight: 700; margin-bottom: 8px; color: #d8e8ff; }
+  .project-desc-full { font-size: 13px; color: var(--text-gray); line-height: 1.7; margin-bottom: 14px; }
+
+  /* SKILLS */
+  #skills.active { display: block; }
+  .skills-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+  .skill-category { padding: 22px; }
+  .skill-cat-title { font-size: 14px; font-weight: 700; color: var(--blue2); letter-spacing: 1px; margin-bottom: 18px; display: flex; align-items: center; gap: 8px; }
+  .skill-list { display: flex; flex-direction: column; gap: 14px; }
+  .skill-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px; }
+  .skill-name { font-size: 14px; color: #c8dcf0; font-weight: 500; }
+  .skill-pct { font-size: 12px; color: var(--blue2); font-weight: 700; }
+  .skill-bar-bg { height: 6px; background: rgba(30,111,255,0.12); border-radius: 3px; overflow: hidden; border: 1px solid rgba(30,111,255,0.15); }
+  .skill-bar-fill { height: 100%; border-radius: 3px; background: linear-gradient(90deg, var(--blue), var(--cyan)); }
+
+  /* CONTACT */
+  #contact.active { display: block; }
+  .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; max-width: 800px; }
+  .contact-info { display: flex; flex-direction: column; gap: 16px; }
+  .contact-card { padding: 18px; display: flex; align-items: center; gap: 16px; }
+  .contact-icon { width: 44px; height: 44px; border-radius: 10px; background: rgba(30,111,255,0.12); color: var(--blue2); font-size: 20px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; border: 1px solid rgba(30,111,255,0.2); }
+  .contact-icon img { width: 39px; height: 39px; object-fit: contain; }
+  .contact-label { font-size: 11px; color: var(--text-gray); margin-bottom: 3px; font-weight: 600; }
+  .contact-value { font-size: 14px; font-weight: 600; color: #d8e8ff; }
+  .contact-value a { color: #d8e8ff; text-decoration: none; transition: color 0.2s; }
+  .contact-value a:hover { color: var(--blue2); text-decoration: underline; }
+  .contact-form { display: flex; flex-direction: column; gap: 14px; }
+  .form-group { display: flex; flex-direction: column; gap: 6px; }
+  .form-label { font-size: 13px; color: #c8dcf0; font-weight: 600; }
+  .form-input,.form-textarea {
+    background: rgba(10,20,42,0.8); border: 1px solid var(--border-light);
+    border-radius: 8px; padding: 10px 14px; font-size: 14px;
+    color: #d8e8ff; font-family: 'Sarabun',sans-serif; outline: none; transition: border 0.2s;
+  }
+  .form-input:focus,.form-textarea:focus { border-color: var(--blue2); }
+  .form-textarea { resize: vertical; min-height: 120px; }
+
+  /* RESUME */
+  #resume.active { display: block; }
+  .resume-layout { display: grid; grid-template-columns: 1fr 1.5fr; gap: 28px; max-width: 900px; }
+  .resume-card { padding: 22px; margin-bottom: 20px; }
+  .resume-section-title { font-size: 13px; font-weight: 700; color: var(--blue2); letter-spacing: 1px; margin-bottom: 16px; padding-bottom: 10px; border-bottom: 1px solid var(--border-light); }
+  .timeline-item { margin-bottom: 18px; position: relative; padding-left: 16px; }
+  .timeline-item::before { content: ''; position: absolute; left: 0; top: 7px; width: 6px; height: 6px; background: var(--blue2); border-radius: 50%; }
+  .timeline-item:not(:last-child)::after { content: ''; position: absolute; left: 2.5px; top: 16px; width: 1px; height: calc(100% + 2px); background: var(--border-light); }
+  .tl-title { font-size: 14px; font-weight: 700; color: #d8e8ff; }
+  .tl-place { font-size: 13px; color: var(--blue2); margin: 2px 0; }
+  .tl-date { font-size: 11px; color: var(--text-gray); }
+  .tl-desc { font-size: 13px; color: var(--text-gray); margin-top: 4px; line-height: 1.6; }
+
+  /* ABOUT */
+  #about.active { display: block; }
+  .about-layout { display: grid; grid-template-columns: 280px 1fr; gap: 32px; max-width: 900px; }
+  .about-profile { padding: 28px 20px; display: flex; flex-direction: column; align-items: center; text-align: center; }
+  .profile-avatar { width: 100px; height: 100px; border-radius: 50%; background: #0d1a30; border: 3px solid var(--blue2); display: flex; align-items: center; justify-content: center; font-size: 46px; margin-bottom: 16px; }
+  .profile-name { font-family: 'Orbitron',sans-serif; font-size: 16px; font-weight: 900; color: #e8f0ff; margin-bottom: 4px; }
+  .profile-role { font-size: 13px; color: var(--text-gray); margin-bottom: 16px; font-weight: 500; }
+  .profile-chips { display: flex; flex-wrap: wrap; gap: 6px; justify-content: center; }
+  .chip { font-size: 11px; padding: 4px 10px; border-radius: 20px; border: 1px solid rgba(30,111,255,0.3); color: var(--blue2); background: rgba(30,111,255,0.08); font-weight: 600; }
+  .about-content { display: flex; flex-direction: column; gap: 18px; }
+  .about-block { padding: 22px; }
+  .about-block-title { font-size: 14px; font-weight: 700; color: var(--blue2); letter-spacing: 1px; margin-bottom: 12px; }
+  .about-text { font-size: 14px; color: var(--text-gray); line-height: 1.85; }
+  .info-list { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+  .info-list li { display: flex; gap: 12px; font-size: 14px; color: #c8dcf0; }
+  .info-list li span:first-child { color: var(--text-gray); min-width: 100px; font-weight: 600; }
+
+  /* CERTS */
+  #certs.active { display: block; }
+  .certs-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+  .cert-card { position: relative; overflow: hidden; border-radius: 18px; border: 1px solid rgba(255,255,255,0.08); transition: transform 0.25s, box-shadow 0.25s, border-color 0.25s; cursor: pointer; background: rgba(10,20,42,0.85); }
+  .cert-card:hover { border-color: rgba(30,111,255,0.4); box-shadow: 0 10px 30px rgba(0,0,0,0.35); transform: translateY(-3px); }
+  .cert-card img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.4s ease; }
+  .cert-card:hover img { transform: scale(1.03); }
+  .cert-overlay { position: absolute; inset: 0; background: linear-gradient(transparent 40%, rgba(0,0,0,0.78)); display: flex; flex-direction: column; justify-content: flex-end; padding: 18px; }
+  .cert-name { font-size: 15px; font-weight: 700; margin-bottom: 6px; color: #ffffff; }
+  .cert-issuer { font-size: 13px; color: #c8dbff; margin-bottom: 2px; font-weight: 600; }
+  .cert-date { font-size: 12px; color: #a8b8d4; }
+  .cert-modal { position: fixed; inset: 0; display: none; align-items: center; justify-content: center; background: rgba(5,12,28,0.9); z-index: 9999; padding: 24px; }
+  .cert-modal.active { display: flex; }
+  .cert-modal-body { position: relative; width: min(100%, 1100px); max-height: min(100%, 1000px); background: rgba(10,18,38,0.96); border: 1px solid rgba(255,255,255,0.1); border-radius: 18px; box-shadow: 0 24px 80px rgba(0,0,0,0.65); overflow: hidden; }
+  .cert-modal-close { position: absolute; top: 16px; right: 16px; width: 38px; height: 38px; border: none; border-radius: 50%; background: rgba(255,255,255,0.08); color: #fff; font-size: 20px; cursor: pointer; z-index: 2; }
+  .cert-modal-img { width: 100%; max-height: calc(100vh - 180px); object-fit: contain; display: block; background: #07101f; }
+  .cert-modal-actions { display: flex; justify-content: flex-end; gap: 10px; padding: 14px 20px 18px; background: rgba(0,0,0,0.24); }
+  .cert-modal-download { display: inline-flex; align-items: center; justify-content: center; gap: 8px; padding: 12px 18px; border-radius: 12px; background: linear-gradient(135deg, #1e6fff, #3d8bff); color: #fff; text-decoration: none; font-weight: 700; transition: transform 0.2s, opacity 0.2s; }
+  .cert-modal-download:hover { transform: translateY(-1px); opacity: 0.95; }
+  .cert-modal-title { font-size: 16px; font-weight: 700; color: #fff; margin-bottom: 6px; }
+  .cert-modal-meta { font-size: 13px; color: #a8b8d4; }
+
+  /* EXPERIENCE */
+  #experience.active { display: block; }
+  .exp-card { padding: 24px; margin-bottom: 20px; max-width: 800px; border-left: 4px solid var(--blue2); }
+  .exp-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 12px; }
+  .exp-role { font-size: 17px; font-weight: 700; color: #e8f0ff; }
+  .exp-company { font-size: 14px; color: var(--text-gray); margin-top: 3px; font-weight: 500; }
+  .exp-period { font-size: 12px; color: var(--blue2); background: rgba(30,111,255,0.12); padding: 6px 14px; border-radius: 6px; font-weight: 700; white-space: nowrap; border: 1px solid rgba(30,111,255,0.2); }
+  .exp-desc { font-size: 14px; color: var(--text-gray); line-height: 1.8; }
+  .exp-tags { margin-top: 14px; display: flex; gap: 6px; flex-wrap: wrap; }
+
+  /* ===== HAMBURGER BUTTON ===== */
+  .hamburger {
+    display: none;
+    position: fixed;
+    top: 14px; left: 14px;
+    z-index: 200;
+    width: 44px; height: 44px;
+    border: none; border-radius: 10px;
+    background: #0f1629;
+    border: 1px solid rgba(245,197,24,0.3);
+    color: var(--yellow);
+    font-size: 22px;
+    cursor: pointer;
+    align-items: center; justify-content: center;
+  }
+  .sidebar-overlay {
+    display: none;
+    position: fixed; inset: 0;
+    background: rgba(0,0,0,0.6);
+    z-index: 99;
+  }
+  .sidebar-overlay.active { display: block; }
+
+  /* ===== MOBILE ===== */
+  @media (max-width: 768px) {
+    :root { --sidebar-w: 0px; }
+
+    .hamburger { display: flex; }
+
+    .sidebar {
+      transform: translateX(-100%);
+      transition: transform 0.28s ease;
+      z-index: 150;
+      width: 240px;
+    }
+    .sidebar.open { transform: translateX(0); }
+
+    .main {
+      margin-left: 0;
+      width: 100%;
+    }
+
+    .section { padding: 56px 16px 24px; }
+
+    /* Hero */
+    .hero {
+      grid-template-columns: 1fr;
+      min-height: unset;
+      gap: 20px;
+    }
+    .hero-visual { display: none; }
+    .hero-name { font-size: 28px; }
+    .hero-desc { font-size: 14px; }
+    .hero-btns { flex-direction: column; gap: 10px; }
+    .btn-primary, .btn-secondary { width: 100%; }
+    .btn-oct-wrap { width: 100%; }
+
+    /* Stats */
+    .stats-bar {
+      grid-template-columns: repeat(2, 1fr);
+      padding: 14px;
+      gap: 10px;
+    }
+    .stat-item:not(:last-child) { border-right: none; padding-right: 0; }
+    .stat-item:nth-child(2n):not(:last-child) { border-right: none; }
+
+    /* Home bottom */
+    .home-bottom-layout { grid-template-columns: 1fr; }
+    .projects-grid { grid-template-columns: 1fr 1fr; gap: 10px; }
+
+    /* Pages */
+    .projects-grid-full { grid-template-columns: 1fr; }
+    .skills-grid { grid-template-columns: 1fr; }
+    .contact-grid { grid-template-columns: 1fr; }
+    .resume-layout { grid-template-columns: 1fr; }
+    .about-layout { grid-template-columns: 1fr; }
+    .certs-grid { grid-template-columns: 1fr; }
+
+    .page-title { font-size: 20px; }
+
+    /* Filter bar */
+    .filter-bar { gap: 6px; }
+    .filter-btn { font-size: 11px; padding: 0 10px; height: 34px; }
+  }
+
+  @media (max-width: 400px) {
+    .projects-grid { grid-template-columns: 1fr; }
+    .stats-bar { grid-template-columns: repeat(2, 1fr); }
+  }
+</style>
+</head>
+<body>
+
+<button class="hamburger" id="hamburger" aria-label="เปิดเมนู">☰</button>
+<div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+<aside class="sidebar">
+  <div class="sidebar-logo">
+    <div class="logo-icon">⚡</div>
+    <div class="logo-title">WATCHARIN<br>PORTFOLIO</div>
+    <div class="logo-sub">ELECTRICAL ENG.</div>
+  </div>
+
+  <ul class="nav-menu">
+    <li class="nav-item active-item">
+      <a class="nav-link active" onclick="showSection('home')" href="#">
+        <div class="nav-icon-box"><img class="nav-icon" src="Images/Sidebar%20icon/Home-Photoroom.png" alt="Home"></div>
+        <span class="nav-label">HOME</span>
+        <div class="nav-corner-tl"></div>
+        <div class="nav-corner-br"></div>
+      </a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" onclick="showSection('projects')" href="#">
+        <div class="nav-icon-box"><img class="nav-icon" src="Images/Sidebar%20icon/Project-Photoroom.png" alt="Projects"></div>
+        <span class="nav-label">PROJECTS</span>
+        <div class="nav-corner-tl"></div>
+        <div class="nav-corner-br"></div>
+      </a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" onclick="showSection('experience')" href="#">
+        <div class="nav-icon-box"><img class="nav-icon" src="Images/Sidebar%20icon/Experience-Photoroom.png" alt="Experience"></div>
+        <span class="nav-label">EXPERIENCE</span>
+        <div class="nav-corner-tl"></div>
+        <div class="nav-corner-br"></div>
+      </a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" onclick="showSection('skills')" href="#">
+        <div class="nav-icon-box"><img class="nav-icon" src="Images/Sidebar%20icon/Skill-Photoroom.png" alt="Skills"></div>
+        <span class="nav-label">SKILLS</span>
+        <div class="nav-corner-tl"></div>
+        <div class="nav-corner-br"></div>
+      </a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" onclick="showSection('about')" href="#">
+        <div class="nav-icon-box"><img class="nav-icon" src="Images/Sidebar%20icon/About%20Me-Photoroom.png" alt="About Me"></div>
+        <span class="nav-label">ABOUT ME</span>
+        <div class="nav-corner-tl"></div>
+        <div class="nav-corner-br"></div>
+      </a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" onclick="showSection('certs')" href="#">
+        <div class="nav-icon-box"><img class="nav-icon" src="Images/Sidebar%20icon/Certificate-Photoroom.png" alt="Certificates"></div>
+        <span class="nav-label">CERTIFICATES</span>
+        <div class="nav-corner-tl"></div>
+        <div class="nav-corner-br"></div>
+      </a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" onclick="showSection('contact')" href="#">
+        <div class="nav-icon-box"><img class="nav-icon" src="Images/Sidebar%20icon/Contact-Photoroom.png" alt="Contact"></div>
+        <span class="nav-label">CONTACT</span>
+        <div class="nav-corner-tl"></div>
+        <div class="nav-corner-br"></div>
+      </a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" onclick="showSection('resume')" href="#">
+        <div class="nav-icon-box"><img class="nav-icon" src="Images/Sidebar%20icon/Resume-Photoroom.png" alt="Resume"></div>
+        <span class="nav-label">RESUME / CV</span>
+        <div class="nav-corner-tl"></div>
+        <div class="nav-corner-br"></div>
+      </a>
+    </li>
+  </ul>
+
+  <div class="sidebar-social">
+    <div class="social-label">LET'S CONNECT</div>
+    <div class="social-icons">
+      <a class="social-btn" href="#" title="LinkedIn">in</a>
+      <a class="social-btn" href="#" title="GitHub">⌥</a>
+      <a class="social-btn" href="#" title="Email">@</a>
+      <a class="social-btn" href="#" title="Line">L</a>
+    </div>
+  </div>
+</aside>
+
+<main class="main">
+
+  <!-- ========== HOME ========== -->
+  <section id="home" class="section active">
+    <div class="hero">
+      <div class="hero-left">
+        <div class="hero-tag">HI, I'M</div>
+        <h1 class="hero-name">ELECTRICAL<br><span class="blue">ENGINEER</span><span class="bolt">⚡</span></h1>
+        <div class="hero-role"><span>DESIGN • ANALYZE • AUTOMATE</span></div>
+        <p class="hero-desc">
+          วิศวกรไฟฟ้าที่ชื่นชอบการออกแบบระบบ คิดวิเคราะห์<br>
+          และพัฒนาระบบไฟฟ้าให้มีประสิทธิภาพ<br>
+          ด้วยเทคโนโลยีที่ทันสมัย
+        </p>
+        <div class="hero-btns">
+          <!-- Yellow primary button -->
+          <div class="btn-oct-wrap" onclick="showSection('projects')">
+            <button class="btn-primary">
+              <div class="btn-icon-box">📂</div>
+              <span class="btn-label">VIEW MY PROJECTS</span>
+              <div class="btn-corner-tl"></div>
+              <div class="btn-corner-br"></div>
+            </button>
+          </div>
+          <!-- Blue secondary button -->
+          <div class="btn-oct-wrap blue-wrap" onclick="showSection('resume')">
+            <button class="btn-secondary">
+              <div class="btn-icon-box">⬇</div>
+              <span class="btn-label">DOWNLOAD CV</span>
+              <div class="btn-corner-tl"></div>
+              <div class="btn-corner-br"></div>
+            </button>
+          </div>
+        </div>
+      </div>
+      <div class="hero-visual">
+        <div class="bg-image-3d" style="background-image: url('');"></div>
+        <div class="quote-box">
+          <span class="q-mark">"</span> THE BEST ENGINEER<br>IS THE ONE WHO BUILDS<br>SOLUTIONS, <span class="highlight">NOT EXCUSES.</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="stats-bar">
+      <div class="stat-item">
+        <div class="stat-icon-wrap yellow">🎓</div>
+        <div><div class="stat-number">3.01</div><div class="stat-label">GPA</div></div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-icon-wrap blue">📁</div>
+        <div><div class="stat-number">8+</div><div class="stat-label">PROJECTS</div></div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-icon-wrap yellow">🏢</div>
+        <div><div class="stat-number">1</div><div class="stat-label">INTERNSHIP</div></div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-icon-wrap blue">🏆</div>
+        <div><div class="stat-number">2</div><div class="stat-label">CERTIFICATES</div></div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-icon-wrap yellow">⏱</div>
+        <div><div class="stat-number">500+</div><div class="stat-label">HOURS OF WORK</div></div>
+      </div>
+    </div>
+
+    <div class="home-bottom-layout">
+      <div>
+        <div class="section-header">
+          <div class="section-title"><span class="bolt">⚡</span> FEATURED PROJECTS</div>
+          <div class="btn-oct-sm-wrap yellow-sm" onclick="showSection('projects')">
+            <button class="view-all"><span>VIEW ALL PROJECTS ></span></button>
+          </div>
+        </div>
+        <div class="projects-grid">
+          <div class="project-card">
+            <div class="project-img" style="background-image: url('');">
+              <span class="project-cat cat-design">SYSTEM DESIGN</span>
+            </div>
+            <div class="project-body">
+              <div class="project-name">Factory Keycard System</div>
+              <div class="project-desc">ออกแบบระบบคีย์การ์ดสำหรับโรงงาน ควบคุมการเข้า-ออก ด้วย Network และ Access Control</div>
+              <div class="project-tags"><span class="tag">AutoCAD</span><span class="tag">Network</span><span class="tag">Access Control</span></div>
+            </div>
+          </div>
+          <div class="project-card">
+            <div class="project-img" style="background-image: url('');">
+              <span class="project-cat cat-iot">HOSPITAL SYSTEM</span>
+            </div>
+            <div class="project-body">
+              <div class="project-name">Nurse Call System</div>
+              <div class="project-desc">ออกแบบระบบสัญญาณเตือนผู้ป่วย เพื่อแจ้งเตือนและสื่อสารระหว่างผู้ป่วยและพยาบาล</div>
+              <div class="project-tags"><span class="tag">PLC</span><span class="tag">Communication</span><span class="tag">Hospital</span></div>
+            </div>
+          </div>
+          <div class="project-card">
+            <div class="project-img" style="background-image: url('');">
+              <span class="project-cat cat-ai">AUTOMATION</span>
+            </div>
+            <div class="project-body">
+              <div class="project-name">PLC Conveyor Control</div>
+              <div class="project-desc">ควบคุมสายพานลำเลียงอัตโนมัติ ด้วย PLC และ HMI</div>
+              <div class="project-tags"><span class="tag">PLC</span><span class="tag">HMI</span><span class="tag">Ladder Logic</span></div>
+            </div>
+          </div>
+          <div class="project-card">
+            <div class="project-img" style="background-image: url('');">
+              <span class="project-cat cat-elec">DATA ANALYSIS</span>
+            </div>
+            <div class="project-body">
+              <div class="project-name">Energy Monitoring</div>
+              <div class="project-desc">วิเคราะห์และแสดงผลการใช้พลังงานไฟฟ้า ด้วย Python และ Dashboard</div>
+              <div class="project-tags"><span class="tag">Python</span><span class="tag">Excel</span><span class="tag">Dashboard</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="about-mini-wrap">
+        <div class="about-mini-top">
+          <div class="mini-avatar" style="background-image: url('./Images/Profile.png');"></div>
+        </div>
+        <div class="about-mini-bottom">
+          <div>
+            <div class="mini-role">ELECTRICAL<br>ENGINEER <span style="color:var(--blue)"></span></div>
+            <div class="mini-desc">มีความสนใจในการออกแบบระบบไฟฟ้าระบบอัตโนมัติ และการประยุกต์ใช้เทคโนโลยีเพื่อเพิ่มประสิทธิภาพในงานวิศวกรรม</div>
+          </div>
+          <div style="filter: drop-shadow(2px 3px 0px rgba(0,0,0,0.5)) drop-shadow(0px 0px 10px rgba(30,111,255,0.3));">
+            <button class="btn-more-about" onclick="showSection('about')"><span> MORE ABOUT ME </span></button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== PROJECTS ========== -->
+  <section id="projects" class="section">
+    <h1 class="page-title">⚡ <span>PROJECTS</span></h1>
+    <p class="page-sub">ผลงานและโปรเจกต์ที่ผ่านมาทั้งหมด</p>
+    <div class="filter-bar">
+      <div style="filter: drop-shadow(2px 3px 0px rgba(0,0,0,0.65)) drop-shadow(0px 0px 8px rgba(245,197,24,0.3)); transition: filter .12s, transform .12s;">
+        <button class="filter-btn active" onclick="filterProjects('all', this)"><span>ทั้งหมด</span></button>
+      </div>
+      <div style="filter: drop-shadow(2px 3px 0px rgba(0,0,0,0.65)); transition: filter .12s, transform .12s;">
+        <button class="filter-btn" onclick="filterProjects('design', this)"><span>System Design</span></button>
+      </div>
+      <div style="filter: drop-shadow(2px 3px 0px rgba(0,0,0,0.65)); transition: filter .12s, transform .12s;">
+        <button class="filter-btn" onclick="filterProjects('iot', this)"><span>IoT / Hospital</span></button>
+      </div>
+      <div style="filter: drop-shadow(2px 3px 0px rgba(0,0,0,0.65)); transition: filter .12s, transform .12s;">
+        <button class="filter-btn" onclick="filterProjects('ai', this)"><span>AI / Data</span></button>
+      </div>
+      <div style="filter: drop-shadow(2px 3px 0px rgba(0,0,0,0.65)); transition: filter .12s, transform .12s;">
+        <button class="filter-btn" onclick="filterProjects('elec', this)"><span>Electrical</span></button>
+      </div>
+    </div>
+    <div class="projects-grid-full" id="projectsGridFull">
+      <div class="project-card-full" data-cat="design">
+        <div class="project-img-full">🔑<span class="project-cat cat-design" style="font-size:11px;padding:4px 10px;">SYSTEM DESIGN</span></div>
+        <div class="project-body-full">
+          <div class="project-name-full">Factory Keycard System</div>
+          <div class="project-desc-full">ออกแบบระบบคีย์การ์ดสำหรับโรงงานอุตสาหกรรม ควบคุมการเข้า-ออกพื้นที่ด้วยระบบ Network และ Access Control</div>
+          <div class="project-tags"><span class="tag">AutoCAD</span><span class="tag">Network</span><span class="tag">Access Control</span><span class="tag">Security</span></div>
+        </div>
+      </div>
+      <div class="project-card-full" data-cat="iot">
+        <div class="project-img-full">🏥<span class="project-cat cat-iot" style="font-size:11px;padding:4px 10px;">HOSPITAL SYSTEM</span></div>
+        <div class="project-body-full">
+          <div class="project-name-full">Nurse Call System</div>
+          <div class="project-desc-full">ออกแบบระบบสัญญาณเรียกพยาบาลในโรงพยาบาล ช่วยให้ผู้ป่วยสามารถแจ้งเตือนเจ้าหน้าที่ได้อย่างรวดเร็ว</div>
+          <div class="project-tags"><span class="tag">Communication</span><span class="tag">Hospital</span><span class="tag">Signal</span></div>
+        </div>
+      </div>
+      <div class="project-card-full" data-cat="ai">
+        <div class="project-img-full">🤖<span class="project-cat cat-ai" style="font-size:11px;padding:4px 10px;">AI DETECTION</span></div>
+        <div class="project-body-full">
+          <div class="project-name-full">AI Detection System</div>
+          <div class="project-desc-full">พัฒนาระบบตรวจจับและวิเคราะห์ด้วย AI ประยุกต์ใช้งานในด้านวิศวกรรม วิเคราะห์ข้อมูลแบบ Real-time</div>
+          <div class="project-tags"><span class="tag">Python</span><span class="tag">AI/ML</span><span class="tag">OpenCV</span><span class="tag">Real-time</span></div>
+        </div>
+      </div>
+      <div class="project-card-full" data-cat="elec">
+        <div class="project-img-full">🔌<span class="project-cat cat-elec" style="font-size:11px;padding:4px 10px;">ELECTRICAL</span></div>
+        <div class="project-body-full">
+          <div class="project-name-full">การติดตั้งระบบไฟฟ้า</div>
+          <div class="project-desc-full">ออกแบบและติดตั้งระบบไฟฟ้าตามมาตรฐาน IEC เดินสายไฟและติดตั้ง Panel Board</div>
+          <div class="project-tags"><span class="tag">Wiring</span><span class="tag">Panel Board</span><span class="tag">IEC Standard</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== EXPERIENCE ========== -->
+  <section id="experience" class="section">
+    <h1 class="page-title">💼 <span>EXPERIENCE</span></h1>
+    <p class="page-sub">ประสบการณ์การทำงานและการฝึกงาน</p>
+    <div class="exp-card">
+      <div class="exp-header">
+        <div>
+          <div class="exp-role">วิศวกรฝึกงาน (Electrical Engineering Intern)</div>
+          <div class="exp-company">บจก. อัมพันเทคโนโลยี</div>
+        </div>
+        <div class="exp-period">2567 - ปัจจุบัน</div>
+      </div>
+      <div class="exp-desc">ฝึกงานด้านวิศวกรรมไฟฟ้าและระบบอัตโนมัติ เรียนรู้การออกแบบและติดตั้งระบบไฟฟ้า ทำงานร่วมกับทีมวิศวกรในการพัฒนาโปรเจกต์จริง</div>
+      <div class="exp-tags">
+        <span class="tag">Electrical System</span><span class="tag">AutoCAD</span>
+        <span class="tag">Panel Installation</span><span class="tag">Troubleshooting</span>
+      </div>
+    </div>
+    <div class="exp-card" style="border-left-color: var(--blue2);">
+      <div class="exp-header">
+        <div>
+          <div class="exp-role">นักศึกษาวิศวกรรมไฟฟ้า</div>
+          <div class="exp-company">มหาวิทยาลัยเทคโนโลยีพระจอมเกล้าพระนครเหนือ (KMUTNB)</div>
+        </div>
+        <div class="exp-period">2564 - ปัจจุบัน</div>
+      </div>
+      <div class="exp-desc">ศึกษาด้านวิศวกรรมไฟฟ้า เน้นการออกแบบวงจรไฟฟ้า ระบบควบคุม และเทคโนโลยีสมัยใหม่</div>
+      <div class="exp-tags">
+        <span class="tag">Circuit Design</span><span class="tag">Power Systems</span>
+        <span class="tag">Control Systems</span><span class="tag">Research</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== SKILLS ========== -->
+  <section id="skills" class="section">
+    <h1 class="page-title">⚙️ <span>SKILLS</span></h1>
+    <p class="page-sub">ทักษะและความสามารถด้านวิศวกรรมไฟฟ้า</p>
+    <div class="skills-grid">
+      <div class="skill-category">
+        <div class="skill-cat-title">⚡ วิศวกรรมไฟฟ้า</div>
+        <div class="skill-list">
+          <div><div class="skill-row"><span class="skill-name">ออกแบบวงจรไฟฟ้า</span><span class="skill-pct">85%</span></div><div class="skill-bar-bg"><div class="skill-bar-fill" style="width:85%"></div></div></div>
+          <div><div class="skill-row"><span class="skill-name">ระบบควบคุม (PLC/HMI)</span><span class="skill-pct">75%</span></div><div class="skill-bar-bg"><div class="skill-bar-fill" style="width:75%"></div></div></div>
+          <div><div class="skill-row"><span class="skill-name">ติดตั้ง Panel Board</span><span class="skill-pct">80%</span></div><div class="skill-bar-bg"><div class="skill-bar-fill" style="width:80%"></div></div></div>
+          <div><div class="skill-row"><span class="skill-name">Power System Analysis</span><span class="skill-pct">70%</span></div><div class="skill-bar-bg"><div class="skill-bar-fill" style="width:70%"></div></div></div>
+        </div>
+      </div>
+      <div class="skill-category">
+        <div class="skill-cat-title">💻 Software & Programming</div>
+        <div class="skill-list">
+          <div><div class="skill-row"><span class="skill-name">AutoCAD / Electrical</span><span class="skill-pct">80%</span></div><div class="skill-bar-bg"><div class="skill-bar-fill" style="width:80%"></div></div></div>
+          <div><div class="skill-row"><span class="skill-name">Python</span><span class="skill-pct">65%</span></div><div class="skill-bar-bg"><div class="skill-bar-fill" style="width:65%"></div></div></div>
+          <div><div class="skill-row"><span class="skill-name">MATLAB / Simulink</span><span class="skill-pct">60%</span></div><div class="skill-bar-bg"><div class="skill-bar-fill" style="width:60%"></div></div></div>
+          <div><div class="skill-row"><span class="skill-name">Microsoft Office</span><span class="skill-pct">90%</span></div><div class="skill-bar-bg"><div class="skill-bar-fill" style="width:90%"></div></div></div>
+        </div>
+      </div>
+      <div class="skill-category">
+        <div class="skill-cat-title">🔧 เครื่องมือและอุปกรณ์</div>
+        <div class="skill-list">
+          <div><div class="skill-row"><span class="skill-name">Oscilloscope / Multimeter</span><span class="skill-pct">85%</span></div><div class="skill-bar-bg"><div class="skill-bar-fill" style="width:85%"></div></div></div>
+          <div><div class="skill-row"><span class="skill-name">เดินสายและต่อวงจร</span><span class="skill-pct">80%</span></div><div class="skill-bar-bg"><div class="skill-bar-fill" style="width:80%"></div></div></div>
+          <div><div class="skill-row"><span class="skill-name">Network & IoT Devices</span><span class="skill-pct">65%</span></div><div class="skill-bar-bg"><div class="skill-bar-fill" style="width:65%"></div></div></div>
+        </div>
+      </div>
+      <div class="skill-category">
+        <div class="skill-cat-title">🤝 Soft Skills</div>
+        <div class="skill-list">
+          <div><div class="skill-row"><span class="skill-name">การทำงานเป็นทีม</span><span class="skill-pct">90%</span></div><div class="skill-bar-bg"><div class="skill-bar-fill" style="width:90%"></div></div></div>
+          <div><div class="skill-row"><span class="skill-name">Problem Solving</span><span class="skill-pct">85%</span></div><div class="skill-bar-bg"><div class="skill-bar-fill" style="width:85%"></div></div></div>
+          <div><div class="skill-row"><span class="skill-name">การนำเสนองาน</span><span class="skill-pct">75%</span></div><div class="skill-bar-bg"><div class="skill-bar-fill" style="width:75%"></div></div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== ABOUT ========== -->
+  <section id="about" class="section">
+    <h1 class="page-title">👤 <span>ABOUT ME</span></h1>
+    <p class="page-sub">รู้จักฉันให้มากขึ้น</p>
+    <div class="about-layout">
+      <div class="about-profile">
+        <div class="profile-avatar" style="background-image: url('images/Profile.png'); background-size: cover; background-position: center;"></div>
+        <div class="profile-name">WATCHARIN WACHANGNGERN</div>
+        <div class="profile-role">Electrical Engineering</div>
+        <div class="profile-chips">
+          <span class="chip">⚡ EE</span><span class="chip">🤖 AI</span>
+          <span class="chip">🔧 Control</span><span class="chip">💡 IoT</span>
+          <span class="chip">📐 AutoCAD</span>
+        </div>
+      </div>
+      <div class="about-content">
+        <div class="about-block">
+          <div class="about-block-title">เกี่ยวกับฉัน</div>
+          <p class="about-text">ผมชื่อ วัชรินทร์ วะชังเงิน นักศึกษาวิศวกรรมไฟฟ้าชั้นปีสุดท้ายจากมหาวิทยาลัยเทคโนโลยีพระจอมเกล้าพระนครเหนือ ผู้มีความสนใจในการออกแบบระบบไฟฟ้า เทคโนโลยีควบคุม และการประยุกต์ใช้ AI ในงานวิศวกรรม</p>
+        </div>
+        <div class="about-block">
+          <div class="about-block-title">ข้อมูลส่วนตัว</div>
+          <ul class="info-list">
+            <li><span>ชื่อ-นามสกุล</span><span>นาย วัชรินทร์ วะชังเงิน</span></li>
+            <li><span>มหาวิทยาลัย</span><span>มหาวิทยาลัยเทคโนโลยีพระจอมเกล้าพระนครเหนือ</span></li>
+            <li><span>คณะ</span><span>ครุศาสตร์อุตสาหกรรม</span></li>
+            <li><span>สาขา</span><span>วิศวกรรมไฟฟ้าและการศึกษา</span></li>
+            <li><span>ฝึกงาน</span><span>บจก. อัมพันเทคโนโลยี</span></li>
+            <li><span>GPA</span><span>3.01</span></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== CERTS ========== -->
+  <section id="certs" class="section">
+    <h1 class="page-title">🏆 <span>CERTIFICATES</span></h1>
+    <p class="page-sub">ใบประกาศและวุฒิบัตรที่ได้รับ</p>
+    <div class="certs-grid">
+      <div class="cert-card cert-card-img" data-img="Images/Certificate/Cira%20core.jpg" data-name="Cira core Certificate" data-issuer="ผู้ออกใบประกาศ" data-date="ปี 2567">
+        <img src="Images/Certificate/Cira%20core.jpg" alt="Cira core Certificate">
+        <div class="cert-overlay">
+          <div class="cert-name">Cira core Certificate</div>
+          <div class="cert-issuer">ผู้ออกใบประกาศ · ปี 2567</div>
+          <div class="cert-date">คลิกเพื่อดูเต็มหน้าจอ</div>
+        </div>
+      </div>
+      <div class="cert-card" style="opacity:0.5;">
+        <div class="cert-icon">➕</div>
+        <div class="cert-name">เพิ่ม Certificate</div>
+        <div class="cert-issuer">แก้ไขในโค้ด</div>
+        <div class="cert-date">-</div>
+      </div>
+    </div>
+  </section>
+
+  <div class="cert-modal" id="certModal">
+    <div class="cert-modal-body">
+      <button class="cert-modal-close" id="certModalClose">×</button>
+      <img id="certModalImg" class="cert-modal-img" src="" alt="Certificate Preview">
+      <div class="cert-modal-actions">
+        <a id="certDownloadLink" class="cert-modal-download" href="#" download>Download</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========== CONTACT ========== -->
+  <section id="contact" class="section">
+    <h1 class="page-title">✉️ <span>CONTACT</span></h1>
+    <div class="contact-grid">
+      <div class="contact-info">
+        <div class="contact-card"><div class="contact-icon"><img src="Images/LOGO/Gmail.png" alt="Email"></div><div><div class="contact-label">EMAIL</div><div class="contact-value"><a href="mailto:Wachangngoen95@gmail.com">Wachangngoen95@gmail.com</a></div></div></div>
+        <div class="contact-card"><div class="contact-icon"><img src="Images/LOGO/Tell.jpg" alt="Phone"></div><div><div class="contact-label">PHONE</div><div class="contact-value"><a href="tel:098-473-3541">098-473-3541</a></div></div></div>
+        <div class="contact-card"><div class="contact-icon"><img src="Images/LOGO/linkedin.png" alt="LinkedIn"></div><div><div class="contact-label">LINKEDIN</div><div class="contact-value"><a href="https://www.linkedin.com/in/watcharin-wachangngern-8b1624330/" target="_blank">https://www.linkedin.com/in/watcharin-wachangngern-8b1624330/</a></div></div></div>
+        <div class="contact-card"><div class="contact-icon"><img src="Images/LOGO/Facebook.png" alt="Facebook"></div><div><div class="contact-label">FACEBOOK</div><div class="contact-value"><a href="https://www.facebook.com/watcharin.wachangngern" target="_blank">https://www.facebook.com/watcharin.wachangngern</a></div></div></div>
+        <div class="contact-card"><div class="contact-icon"><img src="Images/LOGO/LINE.png" alt="LINE"></div><div><div class="contact-label">FACEBOOK</div><div class="contact-value"><a href="https://line.me/ti/p/nW5nCKNWVC" target="_blank">https://line.me/ti/p/nW5nCKNWVC</a></div></div></div>
+      </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== RESUME ========== -->
+  <section id="resume" class="section">
+    <h1 class="page-title">📄 <span>RESUME / CV</span></h1>
+    <p class="page-sub">ประวัติการศึกษาและการทำงาน</p>
+    <div style="filter: drop-shadow(3px 4px 0px rgba(0,0,0,0.7)) drop-shadow(0px 0px 14px rgba(245,197,24,0.5)); display:inline-block; margin-bottom:24px; transition: filter .12s, transform .12s;">
+      <button class="download-btn">
+        <div class="btn-icon-box">⬇</div>
+        <span class="btn-label">ดาวน์โหลด CV (PDF)</span>
+        <div class="btn-corner-tl"></div>
+        <div class="btn-corner-br"></div>
+      </button>
+    </div>
+    <div class="resume-layout">
+      <div>
+        <div class="resume-card">
+          <div class="resume-section-title">🎓 การศึกษา</div>
+          <div class="timeline-item">
+            <div class="tl-title">วิศวกรรมศาสตรบัณฑิต</div>
+            <div class="tl-place">สาขาวิศวกรรมไฟฟ้า — KMUTNB</div>
+            <div class="tl-date">2564 — ปัจจุบัน</div>
+            <div class="tl-desc">มหาวิทยาลัยเทคโนโลยีพระจอมเกล้าพระนครเหนือ คณะวิศวกรรมศาสตร์</div>
+          </div>
+          <div class="timeline-item">
+            <div class="tl-title">มัธยมศึกษาตอนปลาย</div>
+            <div class="tl-place">[ชื่อโรงเรียน]</div>
+            <div class="tl-date">xxxx — xxxx</div>
+          </div>
+        </div>
+        <div class="resume-card">
+          <div class="resume-section-title">📞 ข้อมูลติดต่อ</div>
+          <ul class="info-list" style="gap:12px">
+            <li><span>อีเมล</span><span style="color:var(--blue2)">Wachangngoen95@gmail.com</span></li>
+            <li><span>โทรศัพท์</span><span>098-473-3541</span></li>
+            <li><span>LinkedIn</span><span style="color:var(--blue2)">linkedin.com/in/watcharin</span></li>
+          </ul>
+        </div>
+      </div>
+      <div>
+        <div class="resume-card">
+          <div class="resume-section-title">💼 ประสบการณ์</div>
+          <div class="timeline-item">
+            <div class="tl-title">วิศวกรฝึกงาน</div>
+            <div class="tl-place">บจก. อัมพันเทคโนโลยี</div>
+            <div class="tl-date">2567 — ปัจจุบัน</div>
+            <div class="tl-desc">ฝึกงานด้านวิศวกรรมไฟฟ้าและระบบอัตโนมัติ ออกแบบและติดตั้งระบบไฟฟ้า</div>
+          </div>
+        </div>
+        <div class="resume-card">
+          <div class="resume-section-title">🛠 ทักษะหลัก</div>
+          <div style="display:flex;flex-wrap:wrap;gap:8px">
+            <span class="tag" style="font-size:12px;padding:5px 12px">AutoCAD</span>
+            <span class="tag" style="font-size:12px;padding:5px 12px">Python</span>
+            <span class="tag" style="font-size:12px;padding:5px 12px">PLC/HMI</span>
+            <span class="tag" style="font-size:12px;padding:5px 12px">MATLAB</span>
+            <span class="tag" style="font-size:12px;padding:5px 12px">Circuit Design</span>
+            <span class="tag" style="font-size:12px;padding:5px 12px">Panel Wiring</span>
+            <span class="tag" style="font-size:12px;padding:5px 12px">IoT</span>
+            <span class="tag" style="font-size:12px;padding:5px 12px">AI/ML</span>
+            <span class="tag" style="font-size:12px;padding:5px 12px">Power Systems</span>
+            <span class="tag" style="font-size:12px;padding:5px 12px">MS Office</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<script>
+function showSection(id) {
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.nav-link').forEach(n => n.classList.remove('active'));
+  document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active-item'));
+  const sec = document.getElementById(id);
+  if (sec) sec.classList.add('active');
+  const navMap = { home:0, projects:1, experience:2, skills:3, about:4, certs:5, contact:6, resume:7 };
+  const links = document.querySelectorAll('.nav-link');
+  const items = document.querySelectorAll('.nav-item');
+  if (navMap[id] !== undefined) {
+    links[navMap[id]].classList.add('active');
+    items[navMap[id]].classList.add('active-item');
+  }
+  window.scrollTo(0, 0);
+}
+function filterProjects(cat, btn) {
+  document.querySelectorAll('.filter-btn').forEach(b => {
+    b.classList.remove('active');
+    const wrap = b.parentElement;
+    if (wrap) wrap.style.filter = "drop-shadow(2px 3px 0px rgba(0,0,0,0.65))";
+  });
+  btn.classList.add('active');
+  const wrap = btn.parentElement;
+  if (wrap) wrap.style.filter = "drop-shadow(2px 3px 0px rgba(0,0,0,0.7)) drop-shadow(0px 0px 10px rgba(245,197,24,0.45))";
+  document.querySelectorAll('#projectsGridFull .project-card-full').forEach(card => {
+    card.style.display = (cat === 'all' || card.dataset.cat === cat) ? 'block' : 'none';
+  });
+}
+
+const certModal = document.getElementById('certModal');
+const certModalImg = document.getElementById('certModalImg');
+const certDownloadLink = document.getElementById('certDownloadLink');
+const certModalClose = document.getElementById('certModalClose');
+
+document.querySelectorAll('.cert-card-img').forEach(card => {
+  card.addEventListener('click', () => {
+    const imageUrl = card.dataset.img;
+    const downloadName = imageUrl.split('/').pop();
+    certModalImg.src = imageUrl;
+    certModalImg.alt = card.dataset.name;
+    certDownloadLink.href = imageUrl;
+    certDownloadLink.download = downloadName;
+    certModal.classList.add('active');
+  });
+});
+
+certModalClose.addEventListener('click', () => {
+  certModal.classList.remove('active');
+});
+
+certModal.addEventListener('click', (event) => {
+  if (event.target === certModal) {
+    certModal.classList.remove('active');
+  }
+});
+
+const hamburger = document.getElementById('hamburger');
+const sidebar = document.querySelector('.sidebar');
+const overlay = document.getElementById('sidebarOverlay');
+
+function toggleSidebar() {
+  sidebar.classList.toggle('open');
+  overlay.classList.toggle('active');
+}
+hamburger.addEventListener('click', toggleSidebar);
+overlay.addEventListener('click', toggleSidebar);
+
+// ปิด sidebar หลังคลิกเมนูบนมือถือ
+document.querySelectorAll('.nav-link').forEach(link => {
+  link.addEventListener('click', () => {
+    if (window.innerWidth <= 768) {
+      sidebar.classList.remove('open');
+      overlay.classList.remove('active');
+    }
+  });
+});
+</script>
+</body>
+</html>
