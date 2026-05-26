@@ -550,10 +550,14 @@
     color: #fff; padding: 5px 12px; border-radius: 999px;
     font-size: 11px; letter-spacing: 0.6px; text-transform: uppercase;
   }
-  .project-body-full { padding: 18px; display: flex; flex-direction: column; gap: 12px; }
+  .project-body-full { padding: 18px; display: flex; flex-direction: column; gap: 12px; min-height: 190px; }
   .project-name-full { font-size: 16px; font-weight: 700; margin-bottom: 4px; color: #d8e8ff; }
-  .project-desc-full { font-size: 13px; color: var(--text-gray); line-height: 1.7; margin-bottom: 8px; }
-  .project-tags { display: flex; flex-wrap: wrap; gap: 8px; }
+  .project-desc-full {
+    font-size: 13px; color: var(--text-gray); line-height: 1.7; margin-bottom: 8px;
+    display: -webkit-box; -webkit-line-clamp: 5; -webkit-box-orient: vertical;
+    overflow: hidden; text-overflow: ellipsis;
+  }
+  .project-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: auto; }
   .project-tags .tag { font-size: 12px; padding: 6px 10px; }
   .project-modal { position: fixed; inset: 0; display: none; align-items: center; justify-content: center; background: rgba(5,12,28,0.9); z-index: 9999; padding: 24px; }
   .project-modal.active { display: flex; }
