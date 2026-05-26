@@ -533,10 +533,10 @@
   #projects.active { display: block; }
   .projects-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
   .projects-grid-full { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
-  .project-card-full { overflow: hidden; transition: all 0.25s; cursor: pointer; border-radius: 18px; }
+  .project-card-full { overflow: hidden; transition: all 0.25s; cursor: pointer; border-radius: 18px; background: var(--card-bg); border: 1px solid var(--border-light); display: flex; flex-direction: column; }
   .project-card-full:hover { border-color: rgba(30,111,255,0.4); transform: translateY(-4px); box-shadow: 0 10px 30px rgba(0,0,0,0.35); }
   .project-img-full {
-    position: relative; min-height: 180px;
+    position: relative; min-height: 150px; max-height: 180px;
     background: #0a1628; overflow: hidden;
     display: flex; align-items: center; justify-content: center;
     color: var(--text-gray);
@@ -550,11 +550,25 @@
     color: #fff; padding: 5px 12px; border-radius: 999px;
     font-size: 11px; letter-spacing: 0.6px; text-transform: uppercase;
   }
-  .project-body-full { padding: 18px; }
-  .project-name-full { font-size: 16px; font-weight: 700; margin-bottom: 8px; color: #d8e8ff; }
-  .project-desc-full { font-size: 13px; color: var(--text-gray); line-height: 1.7; margin-bottom: 14px; }
+  .project-body-full { padding: 18px; display: flex; flex-direction: column; gap: 12px; }
+  .project-name-full { font-size: 16px; font-weight: 700; margin-bottom: 4px; color: #d8e8ff; }
+  .project-desc-full { font-size: 13px; color: var(--text-gray); line-height: 1.7; margin-bottom: 8px; }
   .project-tags { display: flex; flex-wrap: wrap; gap: 8px; }
   .project-tags .tag { font-size: 12px; padding: 6px 10px; }
+  .project-modal { position: fixed; inset: 0; display: none; align-items: center; justify-content: center; background: rgba(5,12,28,0.9); z-index: 9999; padding: 24px; }
+  .project-modal.active { display: flex; }
+  .project-modal-body { position: relative; width: min(100%, 1000px); max-height: min(100%, 920px); background: rgba(10,18,38,0.96); border: 1px solid rgba(255,255,255,0.1); border-radius: 18px; box-shadow: 0 24px 80px rgba(0,0,0,0.65); overflow: hidden; display: grid; grid-template-columns: 1fr 1fr; gap: 0; }
+  .project-modal-close { position: absolute; top: 16px; right: 16px; width: 38px; height: 38px; border: none; border-radius: 50%; background: rgba(255,255,255,0.08); color: #fff; font-size: 20px; cursor: pointer; z-index: 2; }
+  .project-modal-img { width: 100%; height: 100%; object-fit: contain; display: block; background: #07101f; }
+  .project-modal-content { padding: 24px; display: flex; flex-direction: column; gap: 14px; overflow-y: auto; }
+  .project-modal-title { font-size: 24px; font-weight: 900; color: #fff; }
+  .project-modal-category { font-size: 13px; color: var(--blue2); text-transform: uppercase; letter-spacing: 1px; }
+  .project-modal-desc { font-size: 14px; color: var(--text-gray); line-height: 1.8; }
+  .project-modal-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: auto; }
+  .project-modal-tags .tag { font-size: 12px; padding: 6px 10px; }
+  @media (max-width: 860px) {
+    .project-modal-body { grid-template-columns: 1fr; max-height: min(100%, 860px); }
+  }
 
   /* SKILLS */
   #skills.active { display: block; }
@@ -1276,6 +1290,18 @@
     </div>
   </section>
 
+  <div class="project-modal" id="projectModal">
+    <div class="project-modal-body">
+      <button class="project-modal-close" id="projectModalClose">×</button>
+      <img id="projectModalImg" class="project-modal-img" src="" alt="Project Preview">
+      <div class="project-modal-content">
+        <div class="project-modal-category" id="projectModalCategory"></div>
+        <div class="project-modal-title" id="projectModalTitle"></div>
+        <div class="project-modal-desc" id="projectModalDesc"></div>
+        <div class="project-modal-tags" id="projectModalTags"></div>
+      </div>
+    </div>
+  </div>
 </main>
 
 <script>
@@ -1332,6 +1358,42 @@ certModalClose.addEventListener('click', () => {
 certModal.addEventListener('click', (event) => {
   if (event.target === certModal) {
     certModal.classList.remove('active');
+  }
+});
+
+const projectModal = document.getElementById('projectModal');
+const projectModalImg = document.getElementById('projectModalImg');
+const projectModalTitle = document.getElementById('projectModalTitle');
+const projectModalCategory = document.getElementById('projectModalCategory');
+const projectModalDesc = document.getElementById('projectModalDesc');
+const projectModalTags = document.getElementById('projectModalTags');
+const projectModalClose = document.getElementById('projectModalClose');
+
+document.querySelectorAll('.project-card-full').forEach(card => {
+  card.addEventListener('click', () => {
+    const imageEl = card.querySelector('.project-img-full img');
+    const title = card.querySelector('.project-name-full')?.textContent.trim() || '';
+    const desc = card.querySelector('.project-desc-full')?.textContent.trim() || '';
+    const category = card.querySelector('.project-cat')?.textContent.trim() || '';
+    const tags = Array.from(card.querySelectorAll('.project-tags .tag')).map(tag => tag.textContent.trim());
+
+    projectModalImg.src = imageEl ? imageEl.src : '';
+    projectModalImg.alt = title;
+    projectModalTitle.textContent = title;
+    projectModalCategory.textContent = category;
+    projectModalDesc.textContent = desc;
+    projectModalTags.innerHTML = tags.map(tag => `<span class="tag">${tag}</span>`).join('');
+    projectModal.classList.add('active');
+  });
+});
+
+projectModalClose.addEventListener('click', () => {
+  projectModal.classList.remove('active');
+});
+
+projectModal.addEventListener('click', (event) => {
+  if (event.target === projectModal) {
+    projectModal.classList.remove('active');
   }
 });
 
